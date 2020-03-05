@@ -18,10 +18,10 @@ class IndexController extends AbstractController
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
-
-        return [
+        $data = [
             'method' => $method,
             'message' => "Hello {$user}.",
         ];
+        return $this->response->success($data);
     }
 }
