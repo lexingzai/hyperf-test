@@ -17,4 +17,14 @@ class TestController extends AbstractController
     {
         return $this->response->success();
     }
+
+    public function testAspect()
+    {
+        $data = [
+            'id' => 1,
+            'name' => 'lexingzai',
+            'aspect' => false
+        ];
+        return $data;
+    }
 }
