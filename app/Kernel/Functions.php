@@ -8,6 +8,9 @@ use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\AsyncQueue\JobInterface;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
 use Hyperf\Utils\ApplicationContext;
+use Swoole\Websocket\Frame;
+use Hyperf\Server\ServerFactory;
+use Swoole\WebSocket\Server as WebSocketServer;
 
 if (! function_exists('di')) {
     /**
@@ -56,3 +59,39 @@ if (! function_exists('amqp_produce')) {
         return di()->get(Producer::class)->produce($message, true);
     }
 }
+
+if (!function_exists('container')) {
+    function container()
+    {
+        return ApplicationContext::getContainer();
+    }
+}
+
+if (!function_exists('redis')) {
+    function redis()
+    {
+        return container()->get(Redis::class);
+    }
+}
+
+if (!function_exists('server')) {
+    function server()
+    {
+        return container()->get(ServerFactory::class)->getServer()->getServer();
+    }
+}
+
+if (!function_exists('frame')) {
+    function frame()
+    {
+        return container()->get(Frame::class);
+    }
+}
+
+if (!function_exists('websocket')) {
+    function webSocket()
+    {
+        return container()->get(WebSocketServer::class);
+    }
+}
+

@@ -20,17 +20,25 @@ class Request
     /**
      * @return bool
      */
-    public function ajax()
+    public function isAjax()
     {
-        return $this->isXmlHttpRequest();
+        return 'XMLHttpRequest' == $this->request->getHeader('X-Requested-With');
     }
 
     /**
      * @return bool
      */
-    public function isXmlHttpRequest()
+    public function isPost()
     {
-        return 'XMLHttpRequest' == $this->request->getHeader('X-Requested-With');
+        return $this->request->isMethod('post');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGet()
+    {
+        return $this->request->isMethod('get');
     }
 
     /**
