@@ -37,7 +37,8 @@
         "hyperf/utils": "~1.1.0",
         "hyperf/constants": "^1.1",
         "hyperf/validation": "^1.1",
-        "phper666/jwt-auth": "~2.0.1"
+        "phper666/jwt-auth": "~2.0.1",
+        "hyperf/model-cache": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
