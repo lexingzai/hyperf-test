@@ -12,6 +12,11 @@ use Phper666\JwtAuth\Middleware\JwtAuthMiddleware as BaseJwtAuthMiddleware;
 
 class JwtAuthMiddleware extends BaseJwtAuthMiddleware
 {
+    //不需要验证路由白名单
+    protected $routeWhiteList = [
+        'login'
+    ];
+
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $isValidToken = false;
@@ -25,8 +30,10 @@ class JwtAuthMiddleware extends BaseJwtAuthMiddleware
                 $isValidToken = true;
             }
         }
+        //获取请求路由名称
         $arr = explode('/',$request->getUri()->getPath());
-        if ($isValidToken || end($arr) === 'login') {
+
+        if ($isValidToken || in_array(end($arr),$this->routeWhiteList)) {
             return $handler->handle($request);
         }
 

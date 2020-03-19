@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use App\Constants\ErrorCode;
 use Hyperf\Utils\Contracts\Arrayable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,7 +27,7 @@ class CoreMiddleware extends HyperfCoreMiddleware
     protected function handleNotFound(ServerRequestInterface $request)
     {
         // 重写路由找不到的处理逻辑
-        return $this->response->fail(404,'访问路由不存在');
+        return $this->response->fail($code = ErrorCode::NOT_FOUND,ErrorCode::getMessage($code));
     }
 
     /**
@@ -37,6 +38,6 @@ class CoreMiddleware extends HyperfCoreMiddleware
     protected function handleMethodNotAllowed(array $methods, ServerRequestInterface $request)
     {
         // 重写 HTTP 方法不允许的处理逻辑
-        return $this->response->fail(405,'请求方式错误');
+        return $this->response->fail($code = ErrorCode::METHOD_NOT_ALLOWED,ErrorCode::getMessage($code));
     }
 }
