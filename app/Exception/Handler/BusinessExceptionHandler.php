@@ -53,9 +53,12 @@ class BusinessExceptionHandler extends ExceptionHandler
     {
         if($code = $this->shouldReturn($throwable)){
             if($throwable instanceof ValidationException){
-//                $this->loggerFactory->info(format_throwable($throwable));
-//                $this->logger->warning(format_throwable($throwable));
-                Log::get()->info(format_throwable($throwable));
+                //三种日志记录方法
+//                $this->loggerFactory->info(format_throwable($throwable));//记录到日志文件
+                Log::get()->info(format_throwable($throwable));//记录到日志文件
+                $this->logger->info(format_throwable($throwable));//打印到控制台 如果dependencies配置文件开启日志接管的话 日志就会记录到日志文件
+
+
                 return $this->response->fail($throwable->status, $throwable->validator->errors()->first());
             }
             return $this->response->fail($code, ErrorCode::getMessage($code));
