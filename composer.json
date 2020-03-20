@@ -38,7 +38,8 @@
         "hyperf/constants": "^1.1",
         "hyperf/validation": "^1.1",
         "phper666/jwt-auth": "~2.0.1",
-        "hyperf/model-cache": "^1.1"
+        "hyperf/model-cache": "^1.1",
+        "hyperf/testing": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
@@ -46,8 +47,7 @@
         "friendsofphp/php-cs-fixer": "^2.14",
         "mockery/mockery": "^1.0",
         "doctrine/common": "^2.9",
-        "phpstan/phpstan": "^0.11.2",
-        "hyperf/testing": "~1.1.0"
+        "phpstan/phpstan": "^0.11.2"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",
