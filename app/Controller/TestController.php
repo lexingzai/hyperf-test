@@ -46,4 +46,22 @@ class TestController extends AbstractController
 
         return $this->translator->trans('messages.welcome', [], 'zh_CN');
     }
+
+    public function testSession()
+    {
+        session()->set('foo', 'bar');
+//        $this->session->setId('HtuvoLgCwPQlhbYNIn7w1ZOJBqO2JHUHUBVGBhUw');
+        $sessionId = session()->getId();
+        $data = [
+            'foo' => session()->get('foo'),
+            'session_id' => $sessionId
+        ];
+        return $this->response->success($data);
+    }
+
+    public function testCache()
+    {
+        cache()->set('foo','bar');
+        return $this->response->success(['foo' => cache()->get('foo')]);
+    }
 }

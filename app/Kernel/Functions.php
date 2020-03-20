@@ -12,6 +12,8 @@ use Swoole\Websocket\Frame;
 use Hyperf\Server\ServerFactory;
 use Swoole\WebSocket\Server as WebSocketServer;
 use Hyperf\View\RenderInterface;
+use Psr\SimpleCache\CacheInterface;
+use Hyperf\Contract\SessionInterface;
 
 if (! function_exists('di')) {
     /**
@@ -100,6 +102,20 @@ if (!function_exists('view')) {
     function view(string $template, array $data = [])
     {
         return container()->get(RenderInterface::class)->render($template, $data);
+    }
+}
+
+if (!function_exists('cache')) {
+    function cache()
+    {
+        return container()->get(CacheInterface::class);
+    }
+}
+
+if (!function_exists('session')) {
+    function session()
+    {
+        return container()->get(SessionInterface::class);
     }
 }
 

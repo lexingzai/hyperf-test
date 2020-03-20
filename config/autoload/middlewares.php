@@ -15,5 +15,6 @@ return [
         App\Middleware\CorsMiddleware::class,
         Hyperf\Validation\Middleware\ValidationMiddleware::class,
 //        App\Middleware\JwtAuthMiddleware::class,
+        Hyperf\Session\Middleware\SessionMiddleware::class,
     ],
 ];
