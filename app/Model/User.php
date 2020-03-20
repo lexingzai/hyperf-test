@@ -25,6 +25,13 @@ class User extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = ['mobile' => 'integer'];
+
+    protected $appends = ['gender'];
+
+    protected function getGenderAttribute()
+    {
+        return 1 ? '男' : '女';
+    }
 
 }

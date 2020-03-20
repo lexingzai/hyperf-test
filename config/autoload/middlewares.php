@@ -16,5 +16,6 @@ return [
         Hyperf\Validation\Middleware\ValidationMiddleware::class,
 //        App\Middleware\JwtAuthMiddleware::class,
         Hyperf\Session\Middleware\SessionMiddleware::class,
+        Hyperf\Tracer\Middleware\TraceMiddleware::class,
     ],
 ];
