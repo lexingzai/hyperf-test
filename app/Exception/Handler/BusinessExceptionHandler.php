@@ -92,6 +92,7 @@ class BusinessExceptionHandler extends ExceptionHandler
      */
     public $doReport = [
         \Hyperf\Validation\ValidationException::class => ErrorCode::VALIDATION_ERROR,
+        \Hyperf\Server\Exception\InvalidArgumentException::class => ErrorCode::INVALID_ARGUMENT_ERROR,
     ];
 
     /**

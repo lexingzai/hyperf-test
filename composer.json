@@ -39,7 +39,10 @@
         "hyperf/validation": "^1.1",
         "phper666/jwt-auth": "~2.0.1",
         "hyperf/model-cache": "^1.1",
-        "hyperf/testing": "^1.1"
+        "hyperf/testing": "^1.1",
+        "hyperf/view": "^1.1",
+        "hyperf/task": "^1.1",
+        "duncan3dc/blade": "^4.8"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

@@ -8,6 +8,7 @@ use App\Service\UserService;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Hyperf\Di\Annotation\Inject;
+use Swoole\Exception;
 
 /**
  * @Controller()

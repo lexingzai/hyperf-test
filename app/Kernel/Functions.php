@@ -11,6 +11,7 @@ use Hyperf\Utils\ApplicationContext;
 use Swoole\Websocket\Frame;
 use Hyperf\Server\ServerFactory;
 use Swoole\WebSocket\Server as WebSocketServer;
+use Hyperf\View\RenderInterface;
 
 if (! function_exists('di')) {
     /**
@@ -92,6 +93,13 @@ if (!function_exists('websocket')) {
     function webSocket()
     {
         return container()->get(WebSocketServer::class);
+    }
+}
+
+if (!function_exists('view')) {
+    function view(string $template, array $data = [])
+    {
+        return container()->get(RenderInterface::class)->render($template, $data);
     }
 }
 

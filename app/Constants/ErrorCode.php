@@ -36,4 +36,9 @@ class ErrorCode extends AbstractConstants
      * @Message("系统参数错误")
      */
     const SYSTEM_INVALID = 700;
+
+    /**
+     * @Message("参数错误")
+     */
+    const INVALID_ARGUMENT_ERROR = 100;
 }
