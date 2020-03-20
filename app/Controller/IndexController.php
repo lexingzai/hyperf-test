@@ -21,6 +21,7 @@ class IndexController extends AbstractController
         $data = [
             'method' => $method,
             'message' => "Hello {$user}.",
+            'user' => $user
         ];
         return $this->response->success($data);
     }
