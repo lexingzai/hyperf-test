@@ -49,7 +49,8 @@
         "hyperf/rpc-server": "^1.1",
         "hyperf/service-governance": "^1.1",
         "hyperf/consul": "^1.1",
-        "hyperf/async-queue": "^1.1"
+        "hyperf/async-queue": "^1.1",
+        "hyperf/elasticsearch": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

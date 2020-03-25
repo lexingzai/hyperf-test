@@ -7,9 +7,13 @@ namespace App\Controller;
 
 use App\Request\testValidationRequest;
 use App\Service\QueueService;
+use Elasticsearch\ClientBuilder;
+use Hyperf\Elasticsearch\ClientBuilderFactory;
+use Hyperf\Guzzle\RingPHP\PoolHandler;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Contract\TranslatorInterface;
+use Swoole\Coroutine;
 
 /**
  * @AutoController()
@@ -92,5 +96,26 @@ class TestController extends AbstractController
     public function testGuzzleClient()
     {
         return guzzle_client()->get('127.0.0.1:9501')->getBody()->getContents();
+    }
+
+    public function testElasticSearch()
+    {
+        // 如果在协程环境下创建，则会自动使用协程版的 Handler，非协程环境下无改变
+//        $builder = $this->container->get(ClientBuilderFactory::class)->create();
+//        $client = $builder->setHosts(['elasticsearch:9200'])->build();
+
+        //进程池
+        $builder = ClientBuilder::create();
+        if (Coroutine::getCid() > 0) {
+            $handler = make(PoolHandler::class, [
+                'option' => [
+                    'max_connections' => 50,
+                ],
+            ]);
+            $builder->setHandler($handler);
+        }
+        $client = $builder->setHosts(['elasticsearch:9200'])->build();
+
+        return $client->info();
     }
 }
