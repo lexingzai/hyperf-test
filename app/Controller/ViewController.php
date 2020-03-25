@@ -16,4 +16,9 @@ class ViewController
     {
         return view('index', ['name' => 'Hyperf']);
     }
+
+    public function webSocket()
+    {
+        return view('websocket');
+    }
 }

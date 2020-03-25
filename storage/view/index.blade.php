@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Hyperf</title>
-    <link type="text/css" rel="styleSheet"  href="css/index.css" />
+    <link type="text/css" rel="styleSheet"  href="/css/index.css" />
 </head>
 <body>
     <div class="content">

@@ -26,6 +26,7 @@ class UserController extends AbstractController
      */
     public function index()
     {
+        var_dump($this->request->getAttribute('test'));
         $res = $this->userService->userList();
         return $this->response->success($res);
     }
