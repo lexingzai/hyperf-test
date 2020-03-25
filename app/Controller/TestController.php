@@ -6,6 +6,7 @@ namespace App\Controller;
 
 
 use App\Request\testValidationRequest;
+use App\Service\QueueService;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Contract\TranslatorInterface;
@@ -20,6 +21,12 @@ class TestController extends AbstractController
      * @var TranslatorInterface
      */
     private $translator;
+
+    /**
+     * @Inject
+     * @var QueueService
+     */
+    protected $service;
 
     public function testValidation(testValidationRequest $request)
     {
@@ -63,5 +70,27 @@ class TestController extends AbstractController
     {
         cache()->set('foo','bar');
         return $this->response->success(['foo' => cache()->get('foo')]);
+    }
+
+    public function testAsyncQueue()
+    {
+        //传统方式
+//        $this->service->push([
+//            'group@hyperf.io',
+//            'https://doc.hyperf.io',
+//            'https://www.hyperf.io',
+//        ],30);
+        //注解方式
+        $this->service->example([
+            'group@hyperf.io',
+            'https://doc.hyperf.io',
+            'https://www.hyperf.io',
+        ]);
+        return $this->response->success();
+    }
+
+    public function testGuzzleClient()
+    {
+        return guzzle_client()->get('127.0.0.1:9501')->getBody()->getContents();
     }
 }

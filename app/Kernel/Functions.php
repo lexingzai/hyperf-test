@@ -14,6 +14,9 @@ use Swoole\WebSocket\Server as WebSocketServer;
 use Hyperf\View\RenderInterface;
 use Psr\SimpleCache\CacheInterface;
 use Hyperf\Contract\SessionInterface;
+use Hyperf\Guzzle\ClientFactory;
+use Hyperf\Guzzle\HandlerStackFactory;
+use GuzzleHttp\Client;
 
 if (! function_exists('di')) {
     /**
@@ -74,6 +77,8 @@ if (!function_exists('redis')) {
     function redis()
     {
         return container()->get(Redis::class);
+        // 通过 DI 容器获取或直接注入 RedisFactory 类
+//        return container()->get(\Hyperf\Redis\RedisFactory::class)->get('foo');
     }
 }
 
@@ -116,6 +121,25 @@ if (!function_exists('session')) {
     function session()
     {
         return container()->get(SessionInterface::class);
+    }
+}
+
+if (!function_exists('guzzle_client')) {
+    function guzzle_client()
+    {
+        $options = [];
+        $middlewares = [];
+        //非Guzzle连接池
+        //return container()->get(ClientFactory::class)->create($options);
+        //Guzzle连接池
+        $factory = new HandlerStackFactory();
+        $stack = $factory->create($options, $middlewares);
+
+        return make(Client::class, [
+            'config' => [
+                'handler' => $stack,
+            ],
+        ]);
     }
 }
 
