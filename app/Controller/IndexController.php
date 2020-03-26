@@ -16,6 +16,7 @@ class IndexController extends AbstractController
 {
     public function index()
     {
+        var_dump(\Hyperf\Utils\Coroutine::id());
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
         $data = [

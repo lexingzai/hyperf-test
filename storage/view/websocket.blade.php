@@ -10,12 +10,6 @@
         </ul>
     </div>
     <div>
-        <select id="action">
-            <option value="who">who</option>
-            <option value="hello">hello</option>
-            <option value="delay">delay</option>
-            <option value="404">404</option>
-        </select>
         <input type="text" id="says">
         <button onclick="say()">发送</button>
     </div>
@@ -44,10 +38,8 @@
     }
     function say() {
         var content = $("#says").val();
-        var action = $("#action").val();
         $("#says").val('');
         websocket.send(JSON.stringify({
-            action:action,
             content:content
         }));
     }

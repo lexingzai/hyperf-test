@@ -15,16 +15,25 @@ class WebSocketController implements OnMessageInterface, OnOpenInterface, OnClos
 {
     public function onMessage(WebSocketServer $server, Frame $frame): void
     {
-        $server->push($frame->fd, $frame->fd . 'Recv: ' . $frame->data);
+//        $server->push($frame->fd, $frame->fd . 'Recv: ' . $frame->data);
+        $data = json_decode($frame->data);
+        if(redis()->sIsMember('websocket', $data->fd)){
+            $server->push(intval($data->fd), $frame->fd . ' say ' . $data->content);
+        }else{
+            $server->push($frame->fd, $data->fd . '不存在');
+        }
+
     }
 
     public function onClose(Server $server, int $fd, int $reactorId): void
     {
-        var_dump('closed');
+//        var_dump($fd . 'closed');
+        redis()->sRemove('websocket',$fd);
     }
 
     public function onOpen(WebSocketServer $server, Request $request): void
     {
-        $server->push($request->fd, 'Opened');
+//        $server->push($request->fd, 'Opened');
+        redis()->sAdd('websocket',$request->fd);
     }
 }
