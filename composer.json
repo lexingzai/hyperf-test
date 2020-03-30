@@ -76,7 +76,7 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Kernel/Helpers/Functions.php"
+            "app/Kernel/Functions.php"
         ]
     },
     "autoload-dev": {
