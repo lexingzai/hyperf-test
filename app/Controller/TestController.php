@@ -16,6 +16,7 @@ use Hyperf\Contract\TranslatorInterface;
 use Swoole\Coroutine;
 use Hyperf\WebSocketClient\ClientFactory;
 use Hyperf\WebSocketClient\Frame;
+use Hyperf\Snowflake\IdGeneratorInterface;
 
 /**
  * @AutoController()
@@ -140,5 +141,13 @@ class TestController extends AbstractController
         $msg = $client->recv(2);
         // 获取文本数据：$res_msg->data
         return $msg->data;
+    }
+
+    public function testSnowfalke()
+    {
+        $generator = container()->get(IdGeneratorInterface::class);
+        $id = $generator->generate();
+        $meta = $generator->degenerate($id);
+        return $this->response->success(compact('id','meta'));
     }
 }
